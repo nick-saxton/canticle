@@ -1,0 +1,14 @@
+.main-artist-search .dropdown,
+.main-artist-search .dropdown-trigger,
+.main-artist-search .dropdown-menu {
+  width: 100%;
+}
+
+.main-artist-search .dropdown-content {
+  max-height: 15vh;
+  overflow-y: scroll;
+}
+
+.spotify-playlist {
+  height: 380px;
+}
