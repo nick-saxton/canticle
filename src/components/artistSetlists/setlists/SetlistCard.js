@@ -18,6 +18,10 @@ class SetlistCard extends React.Component {
   render() {
     const { active, setlist } = this.props;
 
+    // Re-format the event date
+    const datePortions = setlist.eventDate.split("-");
+    const date = `${datePortions[1]}-${datePortions[0]}-${datePortions[2]}`;
+
     return (
       <div className="card" onClick={this.handleSetlistClick}>
         <header
@@ -25,7 +29,9 @@ class SetlistCard extends React.Component {
             "has-background-success": active
           })}
         >
-          <p className="card-header-title">{setlist.venue.name}</p>
+          <p className="card-header-title">
+            {setlist.venue.name} ({date})
+          </p>
         </header>
         <div className="card-content">
           <div className="content">
