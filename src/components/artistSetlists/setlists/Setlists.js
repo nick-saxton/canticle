@@ -8,14 +8,18 @@ import SetlistCard from "./SetlistCard";
 const Setlists = ({ currentSetlistID, setlists }) => (
   <>
     {setlists.map(setlist => (
-      <div className="columns" key={setlist.id}>
-        <div className="column">
-          <SetlistCard
-            active={setlist.id === currentSetlistID}
-            setlist={setlist}
-          />
-        </div>
-      </div>
+      <>
+        {setlist.sets.set.length > 0 && (
+          <div className="columns" key={setlist.id}>
+            <div className="column">
+              <SetlistCard
+                active={setlist.id === currentSetlistID}
+                setlist={setlist}
+              />
+            </div>
+          </div>
+        )}
+      </>
     ))}
   </>
 );

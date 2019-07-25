@@ -26,6 +26,8 @@ const setlistsReducer = (state = initialState, action) => {
           draft.results.push(setlist);
         });
 
+        draft.currentSetlistID = "";
+
         return;
 
       default:

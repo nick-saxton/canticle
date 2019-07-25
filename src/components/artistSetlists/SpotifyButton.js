@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { setlistsOperations } from "../../redux/setlists";
+import { setlistsOperations, setlistsSelectors } from "../../redux/setlists";
 import { userSelectors } from "../../redux/user";
 
 const clientID = "fedfe4f9df1548b39777611a849786a9";
@@ -11,7 +11,23 @@ class SpotifyButton extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      scrollY: 0
+    };
+
     this.handleButtonClick = this.handleButtonClick.bind(this);
+  }
+
+  componentDidMount() {
+    window.onscroll = e => {
+      this.setState({
+        scrollY: window.scrollY
+      });
+    };
+  }
+
+  componentWillUnmount() {
+    window.onscroll = null;
   }
 
   handleButtonClick() {
@@ -25,13 +41,21 @@ class SpotifyButton extends React.Component {
       )}&redirect_uri=${redirectURI}&response_type=token&show_dialog=true`;
       window.close();
     }
-
-    // Generate playlist
-    // Show playlist with widget???
   }
 
   render() {
-    const { user } = this.props;
+    const { disabled, user } = this.props;
+    const { scrollY } = this.state;
+
+    // Calculate "top" for button
+    let top;
+    if (scrollY >= 132) {
+      top = "100px";
+    } else if (scrollY === 0) {
+      top = "auto";
+    } else {
+      top = `${232 - scrollY}px`;
+    }
 
     return (
       <div className="columns is-centered">
@@ -39,6 +63,11 @@ class SpotifyButton extends React.Component {
           <button
             onClick={this.handleButtonClick}
             className="button is-success is-outlined"
+            disabled={disabled}
+            style={{
+              position: "fixed",
+              top: top
+            }}
           >
             {user.accessToken ? "Create Spotify playlist" : "Log in to Spotify"}
           </button>
@@ -49,6 +78,7 @@ class SpotifyButton extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  disabled: !setlistsSelectors.getCurrentSetlistID(state),
   user: userSelectors.getUser(state)
 });
 
