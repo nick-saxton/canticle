@@ -2,8 +2,7 @@ import React from "react";
 
 import ArtistInfo from "./ArtistInfo";
 import Setlists from "./setlists/Setlists";
-import SpotifyButton from "./SpotifyButton";
-import SpotifyPlaylist from "./SpotifyPlaylist";
+import SetlistInteractions from "./SetlistInteractions";
 
 const ArtistSetlists = ({ artist }) => (
   <>
@@ -15,8 +14,7 @@ const ArtistSetlists = ({ artist }) => (
             <Setlists />
           </div>
           <div className="column is-centered">
-            <SpotifyButton />
-            <SpotifyPlaylist />
+            <SetlistInteractions />
           </div>
         </div>
       </div>

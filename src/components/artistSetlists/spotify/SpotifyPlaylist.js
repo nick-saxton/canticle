@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { setlistsSelectors } from "../../redux/setlists";
+import { setlistsSelectors } from "../../../redux/setlists";
 
 const SpotifyPlaylist = ({ playlistID }) => {
   if (!playlistID) {
